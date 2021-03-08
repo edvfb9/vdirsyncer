@@ -30,6 +30,10 @@ def test_basic(monkeypatch):
     metasync(a, b, status, keys=['foo'])
     assert a.get_meta('foo') == b.get_meta('foo') == 'bar'
 
+    a.set_meta('foo', None)
+    metasync(a, b, status, keys=['foo'])
+    assert a.get_meta('foo') is None and b.get_meta('foo') is None
+
     a.set_meta('foo', 'baz')
     metasync(a, b, status, keys=['foo'])
     assert a.get_meta('foo') == b.get_meta('foo') == 'baz'
